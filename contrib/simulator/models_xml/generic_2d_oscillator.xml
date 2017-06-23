@@ -1,0 +1,64 @@
+<!-- 
+Author: Vaibhav Tripathi , June 2017
+
+Details:
+The Generic2dOscillator model is a generic dynamic system with two state
+    variables. The dynamic equations of this model are composed of two ordinary
+    differential equations comprising two nullclines. The first nullcline is a
+    cubic function as it is found in most neuron and population models; the
+    second nullcline is arbitrarily configurable as a polynomial function up to
+    second order. The manipulation of the latter nullcline's parameters allows
+    to generate a wide range of different behaviours.
+
+In the current file the LEMS model based implementation is presented which makes the model portable across simulators
+
+Equations:
+
+State Variable:
+V,W
+Parameters: a,b,c,d,e,f,g,I, tau,alpha,beta,gamma
+Default Values: Various values
+ -->
+ <LEMS>
+ 	<!-- Specifying the Dimensions -->
+ 	<Dimension name="time" t="1" /> 
+ 	<Dimension name="unit"/>     
+ 	<!-- ------------------------- -->
+ 	<!-- Specifying the Units -->
+ 	<!-- No units stated -->
+ 	<!-- ------------------------- -->
+ 	<!-- Specifying the Constants(if any) -->
+ 	<!-- -------------------------------- -->
+ 	<!-- Components -->
+
+ 	<ComponentType name="Generic2dOscillator">
+ 		<Parameter name="tau" dimension="unit"/>
+ 		<Parameter name="I" dimension="unit"/>
+ 		<Parameter name="a" dimension="unit"/>
+ 		<Parameter name="b" dimension="unit"/>
+ 		<Parameter name="c" dimension="unit"/>
+ 		<Parameter name="d" dimension="unit"/>
+ 		<Parameter name="e" dimension="unit"/>
+ 		<Parameter name="f" dimension="unit"/>
+ 		<Parameter name="g" dimension="unit"/>
+ 		<Parameter name="alpha" dimension="unit"/>
+ 		<Parameter name="beta" dimension="unit"/>
+ 		<Parameter name="gamma" dimension="unit"/>
+ 		<!-- Coupling parameters -- we need to figure out where to place them -->
+ 		<Parameter name="c_0" dimension="unit"/>
+ 		<Parameter name="lc_0" dimension="unit"/>
+
+ 		<Exposure name="V" dimension="unit">
+ 		<Exposure name="W" dimension="unit">
+
+ 		<Dynamics>
+ 			<StateVariable name="V" dimension="unit">
+ 			<StateVariable name="W" dimension="unit">
+ 			<TimeDerivative variable="V" value="d * tau * (alpha * W - (f * V*V*V) + (e * V*V) + (g * V) + gamma * I + gamma *c_0 + lc_0)"/>
+ 			<TimeDerivative variable="W" value="d * (a + (b * V) + (c * V*V) - (beta * W)) / tau"/>
+ 		</Dynamics>
+ 	</ComponentType>
+ 	<!-- ------------------------- -->
+ 	<!-- Target -->
+ 	<!-- ------------------------- -->
+ </LEMS>

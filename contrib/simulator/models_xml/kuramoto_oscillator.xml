@@ -1,0 +1,42 @@
+<!-- 
+The Kuramoto model is a model of synchronization phenomena derived by
+    Yoshiki Kuramoto in 1975 which has since been applied to diverse domains
+    including the study of neuronal oscillations and synchronization.
+
+
+In the current file the LEMS model based implementation is presented which makes the model portable across simulators
+
+Equations:
+\dot{\theta}_{k} = \omega_{k} + \mathbf{\Gamma}(\theta_k, \theta_j, u_{kj}) + \sin(W_{\zeta}\theta)
+
+State Variable:
+theta
+Parameters: omega
+ -->
+ <LEMS>
+ 	<!-- Specifying the Dimensions -->
+ 	<Dimension name="time" t="1" /> 
+ 	<Dimension name="unit"/>     
+ 	<!-- ------------------------- -->
+ 	<!-- Specifying the Units -->
+ 	<!-- ------------------------- -->
+ 	<!-- Specifying the Constants(if any) -->
+ 	<!-- -------------------------------- -->
+ 	<!-- Components -->
+ 	<ComponentType name="Generic2dOscillator">
+ 		<Parameter name="omega" dimension="unit"/>
+ 		<!-- Coupling parameters -- we need to figure out where to place them -->
+ 		<Parameter name="c_0" dimension="unit"/>
+ 		<Parameter name="lc_0" dimension="unit"/>
+
+ 		<Exposure name="theta" dimension="unit">
+
+ 		<Dynamics>
+ 			<StateVariable name="theta" dimension="unit">
+ 			<TimeDerivative variable="theta" value="omega + c_0 + lc_0"/>
+ 		</Dynamics>
+ 	</ComponentType>
+ 	<!-- ------------------------- -->
+ 	<!-- Target -->
+ 	<!-- ------------------------- -->
+ </LEMS>
