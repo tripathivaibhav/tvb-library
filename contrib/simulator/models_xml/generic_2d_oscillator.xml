@@ -19,12 +19,16 @@ V,W
 Parameters: a,b,c,d,e,f,g,I, tau,alpha,beta,gamma
 Default Values: Various values
  -->
- <LEMS>
+ <Lems>
  	<!-- Specifying the Dimensions -->
- 	<Dimension name="time" t="1" /> 
+ 	<Dimension name="time" t="-1" /> 
  	<Dimension name="unit"/>     
  	<!-- ------------------------- -->
  	<!-- Specifying the Units -->
+ 	<Dimension name="per_time" t="-1" />
+
+ 	<Unit symbol="ms" dimension="per_time" power="-3" />
+
  	<!-- No units stated -->
  	<!-- ------------------------- -->
  	<!-- Specifying the Constants(if any) -->
@@ -32,7 +36,7 @@ Default Values: Various values
  	<!-- Components -->
 
  	<ComponentType name="Generic2dOscillator">
- 		<Parameter name="tau" dimension="unit"/>
+ 		<Parameter name="tau" dimension="per_time"/>
  		<Parameter name="I" dimension="unit"/>
  		<Parameter name="a" dimension="unit"/>
  		<Parameter name="b" dimension="unit"/>
@@ -48,17 +52,17 @@ Default Values: Various values
  		<Parameter name="c_0" dimension="unit"/>
  		<Parameter name="lc_0" dimension="unit"/>
 
- 		<Exposure name="V" dimension="unit">
- 		<Exposure name="W" dimension="unit">
+ 		<Exposure name="V" dimension="unit"/>
+ 		<Exposure name="W" dimension="unit"/>
 
  		<Dynamics>
- 			<StateVariable name="V" dimension="unit">
- 			<StateVariable name="W" dimension="unit">
+ 			<StateVariable name="V" dimension="unit"/>
+ 			<StateVariable name="W" dimension="unit"/>
  			<TimeDerivative variable="V" value="d * tau * (alpha * W - (f * V*V*V) + (e * V*V) + (g * V) + gamma * I + gamma *c_0 + lc_0)"/>
- 			<TimeDerivative variable="W" value="d * (a + (b * V) + (c * V*V) - (beta * W)) / tau"/>
+ 			<TimeDerivative variable="W" value="d *tau* (a + (b * V) + (c * V*V) - (beta * W))"/>
  		</Dynamics>
  	</ComponentType>
  	<!-- ------------------------- -->
  	<!-- Target -->
  	<!-- ------------------------- -->
- </LEMS>
+ </Lems>

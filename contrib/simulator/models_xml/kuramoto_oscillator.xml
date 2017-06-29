@@ -13,7 +13,7 @@ State Variable:
 theta
 Parameters: omega
  -->
- <LEMS>
+ <Lems>
  	<!-- Specifying the Dimensions -->
  	<Dimension name="time" t="1" /> 
  	<Dimension name="unit"/>     
@@ -39,4 +39,4 @@ Parameters: omega
  	<!-- ------------------------- -->
  	<!-- Target -->
  	<!-- ------------------------- -->
- </LEMS>
+ </Lems>

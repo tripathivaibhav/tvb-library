@@ -4,12 +4,21 @@ This tests the models that are implemented
 In the current file the LEMS model based implementation is presented which makes the model portable across simulators
 
  -->
- <LEMS>
- 	<Target component="oscillator_sim">
- 	<Include file="generic_2d_oscillator.xml">
+ <Lems>
+ 	<Include file="/Users/vaibhav/Documents/Projects/GSOC/tvb-library/contrib/simulator/models_xml/generic_2d_oscillator.xml"/>
  	<!-- Components -->
  	<!-- This example uses the Table 4 parameters value as given by Ghosh et. al. 2008 -->
- 	<Component id="oscillator_sim" type="Generic2DOscillator" a="1.05" b="-1.00" c="0.0" d="0.1" I="0.0" alpha="1.0" beta="0.2" gamma="-1.0" e="0.0" g="1.0" f="0.33" tau="1.25" c_0="0.0" lc_0="0.0"/> 
+ 	<Component id="oscillator_sim" type="Generic2dOscillator" a="1.05" b="-1.00" c="0.0" d="0.1" I="0.0" alpha="1.0" beta="0.2" gamma="-1.0" e="0.0" g="1.0" f="0.33" tau="1.25 ms" c_0="0.0" lc_0="0.0"/> 
+ 	<Target component="sim1"/>
+ 	<Include file="SingleSimulation.xml" />
+    
+    <Simulation id="sim1" length="80ms" step="0.01ms" target="oscillator_sim">
+        <Display id="d0" title="Example 1: Dimensions, Units, ComponentTypes and Components" 
+                 timeScale="1ms" xmin="-10" xmax="90" ymin="-90" ymax="60">
+            <Line id="plot_v" quantity="V" scale="1ms" timeScale="1ms" color="#00c000" />
+            <Line id="plot_w" quantity="W" scale="1ms" timeScale="1ms" color="#0000f0" />
+        </Display>
+    </Simulation>
  	
 
- </LEMS>
+ </Lems>
